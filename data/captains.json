@@ -1,12 +1,12 @@
 [
-  { "fulllName": "Pavlov Killshaw", "class": "1" },
-  { "fulllName": "Jeno Gonzalez", "class": "4" },
-  { "fulllName": "Lauree Wolfer", "class": "2" },
-  { "fulllName": "June Kissack", "class": "4" },
-  { "fulllName": "Brooke McFarlane", "class": "3" },
-  { "fulllName": "Klarika Atteridge", "class": "5" },
-  { "fulllName": "Edie Nobles", "class": "3" },
-  { "fulllName": "Sammy Maylard", "class": "1" },
-  { "fulllName": "Ashlie Heugh", "class": "5" },
-  { "fulllName": "Waring Kynson", "class": "3" }
+  { "name": "Pavlov Killshaw", "class": "1" },
+  { "name": "Jeno Gonzalez", "class": "4" },
+  { "name": "Lauree Wolfer", "class": "2" },
+  { "name": "June Kissack", "class": "4" },
+  { "name": "Brooke McFarlane", "class": "3" },
+  { "name": "Klarika Atteridge", "class": "5" },
+  { "name": "Edie Nobles", "class": "3" },
+  { "name": "Sammy Maylard", "class": "1" },
+  { "name": "Ashlie Heugh", "class": "5" },
+  { "name": "Waring Kynson", "class": "3" }
 ]
