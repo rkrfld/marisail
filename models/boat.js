@@ -21,8 +21,29 @@ module.exports = (sequelize, DataTypes) => {
     maxPassenger: DataTypes.INTEGER,
     basePrice: DataTypes.INTEGER,
     status: DataTypes.STRING,
-    PlanId: DataTypes.INTEGER,
-    CaptainId: DataTypes.INTEGER
+    PlanId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: {
+        msg: `Kapal sudah ditugaskan di kapal lain`
+
+      }
+    },
+    CaptainId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: {
+        msg: `Captain sudah ditugaskan di kapal lain`
+
+      },
+      validate: {
+        notEmpty: {
+          msg: `Captain tidak boleh kosong`
+        },
+        notNull: {
+          msg: `Captain tidak boleh kosong`
+        }}
+    }
   }, {
     sequelize,
     modelName: 'Boat',

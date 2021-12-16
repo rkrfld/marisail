@@ -1,6 +1,7 @@
 const {ArrivePort, DepartPort, Boat, Captain, Plan, User} = require(`../models`)
 const distanceCalculator = require(`../helpers/distanceCalculator`)
 const priceCalculator = require(`../helpers/priceCalculator`)
+const boatValidation = require(`../helpers/boatValidation`)
 
 class ControllerAdmin {
 
@@ -27,20 +28,53 @@ class ControllerAdmin {
     }
 
     static postAddPlan(req, res) {
-        res.send(req.body)
+        // res.send(req.body)
         let {departDate, departPort, arrivePort, captain, boat} = req.body
         let duration
+        let PlanId
         distanceCalculator(departPort, arrivePort)
         .then (data => {
             duration = data
-            return Plan.create({departDate, DepartPortId: departPort, ArrivePortId: arrivePort, duration })
+
+            return priceCalculator(duration, boat)
+        })
+        .then (data => {
+            
+            return Plan.create({departDate, DepartPortId: departPort, ArrivePortId: arrivePort, duration, totalPrice: data })
+        })
+
+        .then (data => {
+            return boatValidation(boat)
+        })
+
+        .then (data => {
+            console.log(data);
+
+            if(data) throw [`Kapal telah memiliki jadwal pelayaran lain`]
+
+            return Plan.findAll()
         })
         .then(data => {
-            Boat.update({CaptainId: captain}, {
+            PlanId = data[data.length-1].id;
+            Boat.update({CaptainId: captain, PlanId }, {
                 where: {
                     id: boat
                 }
             })
+        })
+        .then(data => {
+            res.redirect(`/admin`)
+        })
+        .catch(err => {
+            let errors
+            // console.log(`======================`);
+            // console.log(err.length);
+            // console.log(err, '====>');
+            if(err.errors) errors = err.errors.map(el => el.message)
+            else errors = err
+            if(!captain) errors.push(`Captain tidak boleh kosong`)
+            if(!boat) errors.push(`Boat tidak boleh kosong`)
+            res.send(errors)
         })
     }
 }
