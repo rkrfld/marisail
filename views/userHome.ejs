@@ -1,46 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+
+
+    <title>MariSail!</title>
   </head>
+
   <body>
-    <table border="1">
+
+    <div>
+      <nav class="navbar navbar-light bg-light py-4" style="color: #879ca3">
+        <a class="navbar-brand" href="/">
+          <img
+            src="https://imgur.com/CTluGRV.png"
+            width="50"
+            height="50"
+            class="d-inline-block align-center"
+            alt=""
+          />
+          MariSail
+        </a>
+
+        <div>
+
+          <% if(user.PlanId) { %>
+  
+            <td>
+              <a href="/user/cancelTicket/"><button class="btn btn-danger">Cancel Ticket</button></a>
+            </td>
+            <% } %>
+  
+          <a href="/user/logout"><button class="btn btn-secondary">Logout</button></a>
+        </div>
+
+      </nav>
+    </div>
+
+
+
+
+
+
+    <table class="table table-striped">
       <thead>
-        <th>Depart Date</th>
-        <th>Arrive Date</th>
-        <th>Price</th>
-        <% if(!user.PlanId) { %>
-        <th></th>
-        <% } %>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Depart Date</th>
+          <th scope="col">Arrive Date</th>
+          <th scope="col">Price</th>
+          <% if(!user.PlanId) { %>
+            <th scope="col"></th>
+            <% } %>
+        </tr>
       </thead>
       <tbody>
-        <% data.forEach(elm => {%>
-        <tr>
-          <td><%= dateFormat(elm.departDate) %></td>
-          <td><%= dateFormat(elm.arriveDate) %></td>
-          <td><%= elm.totalPrice %></td>
+        <% data.forEach((elm, i) => {%>
+          <tr>
+            <td><%=i+1 %></td>
+            <td><%= dateFormat(elm.departDate) %></td>
+            <td><%= dateFormat(elm.arriveDate) %></td>
+            <td><%= elm.totalPrice %></td>
+  
+            <% if(!user.PlanId || user.PlanId == 0) { %>
+            <td>
+              <a href="/user/buyTicket/<%=elm.id%>"
+                ><button class="btn btn-success">Buy Ticket</button></a
+              >
+            </td>
+            <% } %>
+          </tr>
+          <%})%>
 
-          <% if(!user.PlanId || user.PlanId == 0) { %>
-          <td>
-            <a href="/user/buyTicket/<%=elm.id%>"
-              ><button>Buy Ticket</button></a
-            >
-          </td>
-          <% } %>
-        </tr>
-        <%})%>
       </tbody>
-    </table>
-    <% if(user.PlanId) { %>
 
-    <td>
-      <a href="/user/cancelTicket/"><button>cancel Ticket</button></a>
-    </td>
-    <% } %>
 
-    <a href="/user/logout">logout</a>
+
+
+
+  
+
+  
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
