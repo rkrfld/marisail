@@ -4,6 +4,7 @@ const priceCalculator = require(`../helpers/priceCalculator`)
 const boatValidation = require(`../helpers/boatValidation`)
 const dateFormat = require('../helpers/dateFormat')
 const boatLooper = require('../helpers/boatLooper')
+const arrivalHelp = require('../helpers/arrivalHelp')
 
 class ControllerAdmin {
 
@@ -151,9 +152,19 @@ class ControllerAdmin {
     }
 
     static list(req, res) {
-        Plan.findAll()
+
+        let tampung
+
+        ArrivePort.findAll({include: Plan})
+
+        .then (data => {
+            tampung = arrivalHelp(data)
+            return Plan.findAll({include: [Boat, DepartPort]})
+
+        })
         .then(data => {
-          res.render('adminHome', {data, dateFormat})
+            console.log(tampung);
+          res.render('adminHome', {data, tampung, dateFormat})
         })
         .catch(err => {
           res.send(err)
