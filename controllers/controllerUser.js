@@ -7,9 +7,20 @@ const bcrypt = require('bcryptjs');
 class ControllerUser {
 
   static list(req, res) {
-    Plan.findAll()
+    let user
+    let allData
+    Plan.findAll({
+      include: {
+        model: User
+      }
+    })
     .then(data => {
-      res.render('userHome', {data, dateFormat})
+      allData = data
+      return User.findByPk(req.session.userId)
+    })
+    .then(data => {
+      res.render('userHome', {data: allData, user: data, dateFormat})
+    
     })
     .catch(err => {
       res.send(err)
@@ -22,9 +33,10 @@ class ControllerUser {
 
   static registerpost(req, res) {
     const { fullName, nik, username, email, password } = req.body;
+    console.log(fullName, nik, username, email, password);
     User.create({ fullName, nik, username, email, password })
     .then(data => {
-      res.redirect('/user/login')
+      res.redirect('/')
     })
     
   }
@@ -61,12 +73,38 @@ class ControllerUser {
     req.session.destroy((err) => {
       if (err) res.send(err);
       else {
-        res.redirect('/user/login')
+        res.redirect('/')
       }
     })
   }
 
-  
+  static buyTicket(req, res) {
+    User.update({ PlanId: req.params.planId }, {
+      where: {
+        id: req.session.userId
+      }
+    })
+    .then(data => {
+      res.redirect('/user')
+    })
+    .catch(err => {
+      res.send(err)
+    })
+  }
+
+  static cancelTicket(req, res) {
+    User.update({ PlanId: null }, {
+      where: {
+        id: req.session.userId
+      }
+    })
+    .then(data => {
+      res.redirect('/user')
+    })
+    .catch(err => {
+      res.send(err)
+    })
+  }
 
 }
 
