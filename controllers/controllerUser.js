@@ -1,30 +1,63 @@
-const User = require('../models/index').User
-const Plan = require('../models/index').Plan
+const { ArrivePort, DepartPort, Boat, Captain, Plan, User } = require(`../models`)
 const sequelize = require('sequelize');
 const dateFormat = require('../helpers/dateFormat')
 const emailSender = require('../helpers/emailsender')
 const bookCode = require('../helpers/bookCode')
 const bcrypt = require('bcryptjs');
+const arrivalHelp = require('../helpers/arrivalHelp')
+const { Op } = require(`sequelize`)
+const moneyFormat = require('../helpers/moneyFormat')
 
 class ControllerUser {
 
   static list(req, res) {
     let user
     let allData
+    let tampung
+    let order
+    // console.log(req.query);
+    let { sort } = req.query
+
+    if(sort === `earlyDate`) order = [['departDate', 'DESC']]
+    if(sort === `LatestDate`) order = [['departDate']]
+    if(sort === `cheapestPrice`) order = [['totalPrice']]
+    if(sort === `expensive`) order = [['totalPrice', 'DESC']]
+
     Plan.findAll({
       include: {
         model: User
-      }
+      }, order
+
+
     })
       .then(data => {
         allData = data
         return User.findByPk(req.session.userId)
       })
+
       .then(data => {
-        res.render('userHome', { data: allData, user: data, dateFormat })
+
+        user = data
+
+        return ArrivePort.findAll({ include: Plan })
+      })
+
+
+      .then(data => {
+        tampung = arrivalHelp(data)
+        // if (search) return Plan.findAll({ include: [Boat, DepartPort], where })
+        return Plan.findAll({ include: [Boat, DepartPort] })
+
+      })
+
+      .then(data => {
+        // console.log(data);
+        // res.send(allData);
+        res.render('userHome', { data: allData, user, dateFormat, tampung, dataBoatDepart: data, moneyFormat })
 
       })
       .catch(err => {
+        console.log(err);
         res.send(err)
       })
   }
@@ -61,7 +94,7 @@ class ControllerUser {
               res.redirect('/user')
             }
           } else {
-            res.redirect('/user/login')
+            res.redirect('/')
           }
         }
       })

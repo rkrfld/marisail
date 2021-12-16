@@ -12,19 +12,17 @@ class ControllerAdmin {
 
   static delete(req, res) {
     let { id } = req.params
-
-    Plan.findByPk(id, { include: Boat })
-
-      .then(data => {
-        return Boat.update({
-          PlanId: null
-        }, {
-          where: {
-            id: data.Boat.id
-          }
-        })
-
-      })
+Plan.findByPk(id, { include: Boat })
+    
+        .then (data => {
+            return Boat.update({
+                PlanId: null,
+                CaptainId: null
+            }, {
+                where: {
+                    id: data.Boat.id
+                }
+            })
 
       .then(data => {
         return Plan.destroy({
@@ -113,7 +111,7 @@ class ControllerAdmin {
 
         })
         .then(data => {
-            console.log(tampung);
+            // res.send(data)
           res.render('adminHome', {data, tampung, dateFormat})
         })
         .catch(err => {
@@ -122,33 +120,47 @@ class ControllerAdmin {
       }
 
 
-      .then(data => {
-        Plan.update({
-          departDate, DepartPortId: departPort, ArrivePortId: arrivePort, duration, totalPrice: price,
-          arriveDate: new Date(departDate).setDate(new Date(departDate).getDate() + duration)
-        }, {
-          where: {
-            id
-          }
+    static postAddPlan(req, res) {
+        // res.send(req.body)
+        let {departDate, departPort, arrivePort, captain, boat} = req.body
+        let duration
+        let PlanId
+        let price
+
+        distanceCalculator(departPort, arrivePort)
+        .then (data => {
+            duration = data
+
+            return priceCalculator(duration, boat)
         })
 
-        return Plan.findAll()
+        .then (data => {
+            price = data
 
-      })
-
-      .then(data => {
-        Boat.update({ PlanId: null }, {
-          where: {
-            PlanId: id
-          }
+            return Plan.findAll()
+            
         })
 
-      })
-      .then(data => {
-        Boat.update({ CaptainId: captain, PlanId: id }, {
-          where: {
-            id: boat
-          }
+            
+        .then (data => {
+            
+            
+            return Plan.create({departDate, DepartPortId: departPort, ArrivePortId: arrivePort, duration, totalPrice: price })
+        })
+
+        .then (data => {return Plan.findAll()})
+
+        .then(data => {
+            PlanId = data[data.length-1].id
+            console.log(captain, PlanId, boat);
+            Boat.update({CaptainId: captain, PlanId }, {
+                where: {
+                    id: boat
+                }
+            })
+        })
+        .then(data => {
+            res.redirect(`/admin`)
         })
       })
 

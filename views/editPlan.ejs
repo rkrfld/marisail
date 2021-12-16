@@ -49,7 +49,6 @@
             <option selected disabled>--SELECT BOAT--</option>
             <% boatData.forEach( el => { %>
                 <option value="<%= el.id %>" <%- data.id === el.id ? 'selected' : '' %> <%- el.PlanId && data.id !== el.id ? 'disabled':'' %>   ><%= el.name %></option>
-
            <% }) %>
         </select>
         <br>
