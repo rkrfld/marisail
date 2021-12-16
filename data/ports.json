@@ -1,0 +1,47 @@
+[
+  {
+    "city": "Jakarta",
+    "distance": 5,
+    "isAntigen": "TRUE"
+  },
+  {
+    "city": "Banten",
+    "distance": 4,
+    "isAntigen": "TRUE"
+  },
+  {
+    "city": "Lampung",
+    "distance": 2,
+    "isAntigen": "TRUE"
+  },
+  {
+    "city": "Semarang",
+    "distance": 6,
+    "isAntigen": "FALSE"
+  },
+  {
+    "city": "Banyuwangi",
+    "distance": 8,
+    "isAntigen": "TRUE"
+  },
+  {
+    "city": "Surabaya",
+    "distance": 9,
+    "isAntigen": "TRUE"
+  },
+  {
+    "city": "Makassar",
+    "distance": 4,
+    "isAntigen": "FALSE"
+  },
+  {
+    "city": "Balikpapan",
+    "distance": 6,
+    "isAntigen": "FALSE"
+  },
+  {
+    "city": "Batam",
+    "distance": 4,
+    "isAntigen": "TRUE"
+  }
+]

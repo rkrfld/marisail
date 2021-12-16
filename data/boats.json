@@ -1,0 +1,93 @@
+[
+  {
+    "name": "ambu ambu",
+    "type": 1,
+    "maxPassenger": 5,
+    "basePrice": 100000,
+    "status": "available"
+  },
+  {
+    "name": "kerapu II",
+    "type": 2,
+    "maxPassenger": 10,
+    "basePrice": 75000,
+    "status": "available"
+  },
+  {
+    "name": "komodo",
+    "type": 3,
+    "maxPassenger": 4,
+    "basePrice": 45000,
+    "status": "available"
+  },
+  {
+    "name": "lema",
+    "type": 2,
+    "maxPassenger": 6,
+    "basePrice": 55000,
+    "status": "available"
+  },
+  {
+    "name": "merawan",
+    "type": 4,
+    "maxPassenger": 4,
+    "basePrice": 50000,
+    "status": "available"
+  },
+  {
+    "name": "baronang",
+    "type": 2,
+    "maxPassenger": 4,
+    "basePrice": 50000,
+    "status": "available"
+  },
+  {
+    "name": "cakalang",
+    "type": 1,
+    "maxPassenger": 7,
+    "basePrice": 95000,
+    "status": "available"
+  },
+  {
+    "name": "cakalang 11",
+    "type": 4,
+    "maxPassenger": 8,
+    "basePrice": 45000,
+    "status": "available"
+  },
+  {
+    "name": "kurisi",
+    "type": 3,
+    "maxPassenger": 4,
+    "basePrice": 45000,
+    "status": "available"
+  },
+  {
+    "name": "umakalada",
+    "type": 3,
+    "maxPassenger": 7,
+    "basePrice": 50000,
+    "status": "available"
+  },
+  {
+    "name": "ranaka",
+    "type": 4,
+    "maxPassenger": 8,
+    "basePrice": 65000,
+    "status": "available"
+  },
+  {
+    "name": "silok",
+    "type": 1,
+    "maxPassenger": 8,
+    "basePrice": 47000,
+    "status": "available"
+  },
+  {
+    "name": "maming",
+    "type": 2,
+    "maxPassenger": 8,
+    "basePrice": 100000,
+    "status": "available"
+  }
+]
