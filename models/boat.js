@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     PlanId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       unique: {
         msg: `Kapal sudah ditugaskan di kapal lain`
 
