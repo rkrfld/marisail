@@ -1,36 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+
+
+    <title>MariSail!</title>
+  </head>
+
+  <body>
+
+    <div>
+      <nav class="navbar navbar-light bg-light py-4" style="color: #879ca3">
+        <a class="navbar-brand" href="/">
+          <img
+            src="https://imgur.com/CTluGRV.png"
+            width="50"
+            height="50"
+            class="d-inline-block align-center"
+            alt=""
+          />
+          MariSail
+        </a>
+
+        <div>
+
+
+              <a href="/admin/addPlan" ><button class="btn btn-primary">Add Plan</button></a>
+
   
-  <table border="1">
-    <thead>
-        <th>id</th>
-      <th>Depart Date</th>
-      <th>Arrive Date</th>
-      <th>Price</th>
-      <th></th>
-    </thead>
-    <tbody>
-      <% data.forEach(elm => {%>
+          <a href="/admin/logout"><button class="btn btn-secondary">Logout</button></a>
+        </div>
+
+      </nav>
+    </div>
+
+
+
+
+
+
+    <table class="table table-striped">
+      <thead>
         <tr>
-            <td><%= elm.id %></td>
-          <td><%= dateFormat(elm.departDate) %></td>
-          <td><%= dateFormat(elm.arriveDate) %></td>
-          <td><%= elm.totalPrice %></td>
-          <td><button onclick="window.location.href='/admin/<%=elm.id%>/edit'">Edit</button> <button onclick="window.location.href='/admin/<%=elm.id%>/delete'">Delete</button></td>
-
+          <th scope="col">No</th>
+          <th scope="col">Ship Name</th>
+          <th scope="col">Depart Date</th>
+          <th scope="col">Arive Date</th>
+          <th scope="col">Depart Port</th>
+          <th scope="col">Arive Port</th>
+          <th scope="col">Price</th> 
+            <th scope="col">Action</th>
         </tr>
-      <%})%>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% data.forEach((elm, i) => {%>
+          <tr>
+              <td><%= i+1 %></td>
+              <td>ship name</td>
+            <td><%= dateFormat(elm.departDate) %></td>
+            <td><%= dateFormat(elm.arriveDate) %></td>
+            <td>depart port</td>
+            <td>arrive port</td>
+            <td><%= elm.totalPrice %></td>
+            <td>
+              <a href="/admin/<%=elm.id%>/edit"><button class="btn btn-success">Edit</button></a>
+              <a href="/admin/<%=elm.id%>/delete"><button class="btn btn-danger">Delete</button></a>
 
-  <a href="/admin/logout">logout</a>
+            </td>
+  
+          </tr>
+        <%})%>
 
-</body>
+      </tbody>
+
+
+
+
+
+
+
+  
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

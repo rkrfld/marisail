@@ -1,28 +1,28 @@
-const {ArrivePort, DepartPort, Boat, Captain, Plan, User} = require(`../models`)
+const { ArrivePort, DepartPort, Boat, Captain, Plan, User } = require(`../models`)
 
 function priceCalculator(distance, boatId) {
 
-    let basePrice
-    let price
+  let basePrice
+  let price
 
-    return Boat.findByPk(boatId)
+  return Boat.findByPk(boatId)
 
     .then(data => {
-        if(!data) return 0
-        else {
+      if (!data) return 0
+      else {
 
-            basePrice = data.basePrice;
-            price = distance * basePrice
-    
-            return price
-        }
+        basePrice = data.basePrice;
+        price = distance * basePrice
+
+        return price
+      }
     })
 
 
-    
 
 
-    
+
+
 }
 
 module.exports = priceCalculator

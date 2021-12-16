@@ -1,63 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>ADMIN</h1>
-    <form method="post">
-        <label for="departDate">Departure Date</label>
-        <br>
-        <input name="departDate" type="date">
-        <br>
-        <label for="departPort">Departure Port</label>
-        <br>
-        <select name="departPort">
-            <option selected disabled>--SELECT PORT--</option>
-            <% portData.forEach( el => { %>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <title>Add Plan</title>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+
+        </div>
+
+
+
+        <div class="col-sm ">
+
+          <h1 class="d-flex justify-content-between">Add Plan</h1>
+      
+          <form>
+            <div class="form-outline mb-4 d-flex justify-content-between">
+              <label class="form-label" for="form1Example1">Departure Date</label>
+              <input name="departDate" type="date" />
+            </div>
+      
+            <div class="form-outline mb-4 d-flex justify-content-between">
+              <label class="form-label" for="form1Example2">Departure Port</label>
+              <select name="departPort">
+                <option selected disabled>--SELECT PORT--</option>
+                <% portData.forEach( el => { %>
                 <option value="<%= el.id %>"><%= el.city %></option>
+      
+                <% }) %>
+              </select>
+            </div>
+      
+            <div class="form-outline mb-4 d-flex justify-content-between">
+              <label class="form-label" for="form1Example2">Arrival Port</label>
+              <select name="arrivePort">
+                  <option selected disabled>--SELECT PORT--</option>
+                  <% portData.forEach( el => { %>
+                      <option value="<%= el.id %>"><%= el.city %></option>
+      
+                  <% }) %>
+              </select>
+            </div>
+            
+            <div class="form-outline mb-4 d-flex justify-content-between">
+              <label class="form-label" for="form1Example2">Captain</label>
+              <select name="captain">
+                  <option selected disabled>--SELECT CAPTAIN--</option>
+                  <% captainData.forEach( el => { %>
+                      <option value="<%= el.id %>" <%- obj[el.id] ? 'disabled': '' %>><%= el.name %></option>
+      
+                <% }) %>
+              </select>
+            </div>
+            
+            
+            <div class="form-outline mb-4 d-flex justify-content-between">
+              <label class="form-label" for="form1Example2">Boat</label>
+              <select name="boat">
+                  <option selected disabled>--SELECT BOAT--</option>
+                  <% boatData.forEach( el => { %>
+                      <option value="<%= el.id %>" <%- el.PlanId ? 'disabled':'' %>><%= el.name %></option>
+      
+                  <% }) %>
+              </select>
+            </div>
+      
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            <button type="reset" class="btn btn-light btn-block">Reset</button>
+          </form>
+        </div>
 
-           <% }) %>
-        </select>
-        <br>
-        <label for="arrivePort">Arrival Port</label>
-        <br>
-        <select name="arrivePort">
-            <option selected disabled>--SELECT PORT--</option>
-            <% portData.forEach( el => { %>
-                <option value="<%= el.id %>"><%= el.city %></option>
 
-           <% }) %>
-        </select>
-        <br>
-        <label for="captain">Captain</label>
-        <br>
-        <select name="captain">
-            <option selected disabled>--SELECT CAPTAIN--</option>
-            <% captainData.forEach( el => { %>
-                <option value="<%= el.id %>" <%- obj[el.id] ? 'disabled': '' %>><%= el.name %></option>
 
-           <% }) %>
-        </select>
-        <br>
-        <label for="boat">Boat</label>
-        <br>
-        <select name="boat">
-            <option selected disabled>--SELECT BOAT--</option>
-            <% boatData.forEach( el => { %>
-                <option value="<%= el.id %>" <%- el.PlanId ? 'disabled':'' %>><%= el.name %></option>
+        <div class="col-sm">
 
-           <% }) %>
-        </select>
-        <br>
-        <input type="submit" value="SUBMIT PLAN">
-        <input type="reset" value="RESET">
+        </div>
+      </div>
+    </div>
 
-    </form>
     
-    
-</body>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
