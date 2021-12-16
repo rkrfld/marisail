@@ -9,16 +9,25 @@ function distanceCalculator(departId, arriveId) {
     return DepartPort.findByPk(departId)
 
     .then(data => {
-        depart = data.distance;
 
-        return ArrivePort.findByPk(arriveId)
+        if(!data) return 0
+        else {
+
+            depart = data.distance;
+    
+            return ArrivePort.findByPk(arriveId)
+        }
     })
 
     .then(data => {
-        arrive = data.distance
-        distance = Math.abs(arrive - depart)
-        
-        return distance
+        if(!data) return 0
+        else {
+
+            arrive = data.distance
+            distance = Math.abs(arrive - depart)
+            
+            return distance
+        }
     })
 
     
