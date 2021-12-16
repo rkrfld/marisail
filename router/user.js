@@ -15,18 +15,18 @@ userRouter.get('/user/logout', ControllerUser.logout)
 
 // ===============middleware================
 userRouter.use(function (req, res, next) {
-
   if(!req.session.userId) {
     res.redirect('/user/login')
   } else {
     next()
   }
-  // console.log('Time:', Date.now())
-  // next()
 })
 // ===============middleware================
 
 userRouter.get(`/user`, ControllerUser.list)
+
+userRouter.get(`/user/buyTicket/:planId`, ControllerUser.buyTicket)
+userRouter.get(`/user/cancelTicket/`, ControllerUser.cancelTicket)
 
 
 

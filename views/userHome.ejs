@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-  <table border="1">
-    <thead>
-      <th>Depart Date</th>
-      <th>Arrive Date</th>
-      <th>Price</th>
-      <th></th>
-    </thead>
-    <tbody>
-      <% data.forEach(elm => {%>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="1">
+      <thead>
+        <th>Depart Date</th>
+        <th>Arrive Date</th>
+        <th>Price</th>
+        <% if(!user.PlanId) { %>
+        <th></th>
+        <% } %>
+      </thead>
+      <tbody>
+        <% data.forEach(elm => {%>
         <tr>
           <td><%= dateFormat(elm.departDate) %></td>
           <td><%= dateFormat(elm.arriveDate) %></td>
           <td><%= elm.totalPrice %></td>
-          <td>temp action</td>
 
+          <% if(!user.PlanId || user.PlanId == 0) { %>
+          <td>
+            <a href="/user/buyTicket/<%=elm.id%>"
+              ><button>Buy Ticket</button></a
+            >
+          </td>
+          <% } %>
         </tr>
-      <%})%>
-    </tbody>
-  </table>
+        <%})%>
+      </tbody>
+    </table>
+    <% if(user.PlanId) { %>
 
-  <a href="/user/logout">logout</a>
+    <td>
+      <a href="/user/cancelTicket/"><button>cancel Ticket</button></a>
+    </td>
+    <% } %>
 
-</body>
+    <a href="/user/logout">logout</a>
+  </body>
 </html>
