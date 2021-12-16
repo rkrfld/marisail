@@ -9,8 +9,7 @@ let fixData = data.map(el => {
     maxPassenger: el.maxPassenger,
     basePrice: el.basePrice,
     status: el.status,
-    PlanId: 2,
-    CaptainId: 1
+
   }
 })
 
