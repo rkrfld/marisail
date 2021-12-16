@@ -1,7 +1,25 @@
+const {ArrivePort, DepartPort, Boat, Captain, Plan, User} = require(`../models`)
+
 class ControllerAdmin {
 
     static addPlan(req, res) {
-        res.render(`addPlan`)
+        let portData
+        let captainData
+        let boatData
+        ArrivePort.findAll()
+        .then(data => {
+            portData = data
+            return Captain.findAll()
+        })
+        .then(data => {
+            captainData = data
+            return Boat.findAll() 
+        })
+        .then(data => {
+            boatData = data
+            res.render(`addPlan`, {portData, captainData, boatData})
+        })
+        // res.render(`addPlan`)
 
     }
 
