@@ -1,6 +1,8 @@
 const { ArrivePort, DepartPort, Boat, Captain, Plan, User } = require(`../models`)
 const sequelize = require('sequelize');
 const dateFormat = require('../helpers/dateFormat')
+const emailSender = require('../helpers/emailsender')
+const bookCode = require('../helpers/bookCode')
 const bcrypt = require('bcryptjs');
 const arrivalHelp = require('../helpers/arrivalHelp')
 const { Op } = require(`sequelize`)
@@ -66,7 +68,6 @@ class ControllerUser {
 
   static registerpost(req, res) {
     const { fullName, nik, username, email, password } = req.body;
-    console.log(fullName, nik, username, email, password);
     User.create({ fullName, nik, username, email, password })
       .then(data => {
         res.redirect('/')
@@ -112,12 +113,27 @@ class ControllerUser {
   }
 
   static buyTicket(req, res) {
+
     User.update({ PlanId: req.params.planId }, {
       where: {
         id: req.session.userId
       }
     })
       .then(data => {
+        return User.findByPk(req.session.userId)
+      })
+      .then(data => {
+        return User.update({ bookCode: bookCode(data) }, {
+          where: {
+            id: req.session.userId
+          }
+        })
+      })
+      .then(data => {
+        return User.findByPk(req.session.userId)
+      })
+      .then(data => {
+        emailSender(data);
         res.redirect('/user')
       })
       .catch(err => {
