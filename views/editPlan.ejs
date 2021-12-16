@@ -11,14 +11,14 @@
     <form method="post">
         <label for="departDate">Departure Date</label>
         <br>
-        <input name="departDate" type="date">
+        <input name="departDate" value="<%= dateFormat(data.Plan.departDate) %>" type="date">
         <br>
         <label for="departPort">Departure Port</label>
         <br>
         <select name="departPort">
-            <option selected disabled>--SELECT PORT--</option>
+            <option disabled>--SELECT PORT--</option>
             <% portData.forEach( el => { %>
-                <option value="<%= el.id %>"><%= el.city %></option>
+                <option value="<%= el.id %>" <%- data.Plan.DepartPortId === el.id ? 'selected' : '' %> ><%= el.city %></option>
 
            <% }) %>
         </select>
@@ -26,9 +26,9 @@
         <label for="arrivePort">Arrival Port</label>
         <br>
         <select name="arrivePort">
-            <option selected disabled>--SELECT PORT--</option>
+            <option disabled>--SELECT PORT--</option>
             <% portData.forEach( el => { %>
-                <option value="<%= el.id %>"><%= el.city %></option>
+                <option value="<%= el.id %>" <%- data.Plan.ArrivePortId === el.id ? 'selected' : '' %>><%= el.city %></option>
 
            <% }) %>
         </select>
@@ -36,9 +36,9 @@
         <label for="captain">Captain</label>
         <br>
         <select name="captain">
-            <option selected disabled>--SELECT CAPTAIN--</option>
+            <option disabled>--SELECT CAPTAIN--</option>
             <% captainData.forEach( el => { %>
-                <option value="<%= el.id %>" <%- obj[el.id] ? 'disabled': '' %>><%= el.name %></option>
+                <option value="<%= el.id %>" <%- data.Captain.id === el.id ? 'selected' : '' %> <%- obj[el.id] ? 'disabled': '' %> ><%= el.city %><%= el.name %></option>
 
            <% }) %>
         </select>
@@ -48,7 +48,7 @@
         <select name="boat">
             <option selected disabled>--SELECT BOAT--</option>
             <% boatData.forEach( el => { %>
-                <option value="<%= el.id %>" <%- el.PlanId ? 'disabled':'' %>><%= el.name %></option>
+                <option value="<%= el.id %>" <%- data.id === el.id ? 'selected' : '' %> <%- el.PlanId && data.id !== el.id ? 'disabled':'' %>   ><%= el.name %></option>
 
            <% }) %>
         </select>

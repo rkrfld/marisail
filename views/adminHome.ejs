@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <table border="1">
+    <thead>
+        <th>id</th>
+      <th>Depart Date</th>
+      <th>Arrive Date</th>
+      <th>Price</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% data.forEach(elm => {%>
+        <tr>
+            <td><%= elm.id %></td>
+          <td><%= dateFormat(elm.departDate) %></td>
+          <td><%= dateFormat(elm.arriveDate) %></td>
+          <td><%= elm.totalPrice %></td>
+          <td><button onclick="window.location.href='/admin/<%=elm.id%>/edit'">Edit</button> <button onclick="window.location.href='/admin/<%=elm.id%>/delete'">Delete</button></td>
+
+        </tr>
+      <%})%>
+    </tbody>
+  </table>
+
+  <a href="/admin/logout">logout</a>
+
+</body>
+</html>
