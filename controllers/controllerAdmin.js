@@ -5,6 +5,8 @@ const boatValidation = require(`../helpers/boatValidation`)
 const dateFormat = require('../helpers/dateFormat')
 const boatLooper = require('../helpers/boatLooper')
 const bcrypt = require('bcryptjs');
+const arrivalHelp = require('../helpers/arrivalHelp')
+
 
 class ControllerAdmin {
 
@@ -96,7 +98,29 @@ class ControllerAdmin {
 
         if (data) throw [`Kapal telah memiliki jadwal pelayaran lain`]
 
+
       })
+
+    static list(req, res) {
+
+        let tampung
+
+        ArrivePort.findAll({include: Plan})
+
+        .then (data => {
+            tampung = arrivalHelp(data)
+            return Plan.findAll({include: [Boat, DepartPort]})
+
+        })
+        .then(data => {
+            console.log(tampung);
+          res.render('adminHome', {data, tampung, dateFormat})
+        })
+        .catch(err => {
+          res.send(err)
+        })
+      }
+
 
       .then(data => {
         Plan.update({
