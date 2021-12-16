@@ -7,21 +7,29 @@
   <title>Document</title>
 </head>
 <body>
+
+    
   
   <table border="1">
     <thead>
-        <th>id</th>
+        <th>No</th>
+      <th>Ship Name</th>
       <th>Depart Date</th>
       <th>Arrive Date</th>
+      <th>Depart Port</th>
+      <th>Arrive Port</th>
       <th>Price</th>
-      <th></th>
+      <th>Action</th>
     </thead>
     <tbody>
-      <% data.forEach(elm => {%>
+      <% data.forEach((elm, index) => {%>
         <tr>
-            <td><%= elm.id %></td>
+            <td><%= index + 1 %></td>
+            <td><%= elm.Boat.name %></td>
           <td><%= dateFormat(elm.departDate) %></td>
           <td><%= dateFormat(elm.arriveDate) %></td>
+          <td><%= elm.DepartPort.city %></td>
+          <td><%= tampung[elm.ArrivePortId] %></td>
           <td><%= elm.totalPrice %></td>
           <td><button onclick="window.location.href='/admin/<%=elm.id%>/edit'">Edit</button> <button onclick="window.location.href='/admin/<%=elm.id%>/delete'">Delete</button></td>
 

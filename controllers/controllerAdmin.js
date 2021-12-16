@@ -15,7 +15,8 @@ class ControllerAdmin {
 
         .then (data => {
             return Boat.update({
-                PlanId: null
+                PlanId: null,
+                CaptainId: null
             }, {
                 where: {
                     id: data.Boat.id
@@ -163,7 +164,7 @@ class ControllerAdmin {
 
         })
         .then(data => {
-            console.log(tampung);
+            // res.send(data)
           res.render('adminHome', {data, tampung, dateFormat})
         })
         .catch(err => {
@@ -200,6 +201,7 @@ class ControllerAdmin {
         let duration
         let PlanId
         let price
+
         distanceCalculator(departPort, arrivePort)
         .then (data => {
             duration = data
@@ -209,23 +211,23 @@ class ControllerAdmin {
 
         .then (data => {
             price = data
-            
-            return boatValidation(boat)
-        })
-
-        .then (data => {
-
-            if(data) throw [`Kapal telah memiliki jadwal pelayaran lain`]
 
             return Plan.findAll()
+            
         })
+
+            
         .then (data => {
-            PlanId = data[data.length-1].id
+            
             
             return Plan.create({departDate, DepartPortId: departPort, ArrivePortId: arrivePort, duration, totalPrice: price })
         })
 
+        .then (data => {return Plan.findAll()})
+
         .then(data => {
+            PlanId = data[data.length-1].id
+            console.log(captain, PlanId, boat);
             Boat.update({CaptainId: captain, PlanId }, {
                 where: {
                     id: boat
