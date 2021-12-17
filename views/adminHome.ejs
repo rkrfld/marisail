@@ -67,13 +67,14 @@
       <tbody>
         <% data.forEach((elm, i) => {%>
           <tr>
-              <td><%= i+1 %></td>
-              <td>ship name</td>
+            <td><%= i+1 %></td>
+            <td><%= elm.Boat.name %></td>
             <td><%= dateFormat(elm.departDate) %></td>
             <td><%= dateFormat(elm.arriveDate) %></td>
-            <td>depart port</td>
-            <td>arrive port</td>
-            <td><%= elm.totalPrice %></td>
+            <td><%= elm.DepartPort.city %></td>
+            <td><%= tampung[elm.ArrivePortId] %></td>
+            
+            <td><%= moneyFormat(elm.totalPrice) %></td>
             <td>
               <a href="/admin/<%=elm.id%>/edit"><button class="btn btn-success">Edit</button></a>
               <a href="/admin/<%=elm.id%>/delete"><button class="btn btn-danger">Delete</button></a>

@@ -30,18 +30,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     CaptainId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       unique: {
         msg: `Captain sudah ditugaskan di kapal lain`
 
-      },
-      validate: {
-        notEmpty: {
-          msg: `Captain tidak boleh kosong`
-        },
-        notNull: {
-          msg: `Captain tidak boleh kosong`
-        }}
+      }
     }
   }, {
     sequelize,
