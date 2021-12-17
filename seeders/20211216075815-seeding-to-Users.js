@@ -1,6 +1,6 @@
 'use strict';
 const fs = require('fs')
-const data = JSON.parse(fs.readFileSync('./data/users.JSON'))
+const data = JSON.parse(fs.readFileSync('./data/users.json'))
 // console.log(data);
 let fixData = data.map(el => {
   return {

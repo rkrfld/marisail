@@ -15,7 +15,6 @@ class ControllerUser {
     let allData
     let tampung
     let order
-    // console.log(req.query);
     let { sort } = req.query
 
     if(sort === `earlyDate`) order = [['departDate', 'DESC']]
@@ -51,13 +50,10 @@ class ControllerUser {
       })
 
       .then(data => {
-        // console.log(data);
-        // res.send(allData);
         res.render('userHome', { data: allData, user, dateFormat, tampung, dataBoatDepart: data, moneyFormat })
 
       })
       .catch(err => {
-        console.log(err);
         res.send(err)
       })
   }

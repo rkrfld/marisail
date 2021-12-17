@@ -67,7 +67,6 @@ class ControllerAdmin {
 
 
       .then(data => {
-          console.log(captainData);
 
           res.render(`editPlan`, {data: data[0], portData, captainData, boatData, obj: boatLooper(boatData), dateFormat})
       })
@@ -78,8 +77,6 @@ class ControllerAdmin {
       let {id} = req.params
       let {departDate, departPort, arrivePort, captain, boat} = req.body
 
-      console.log(captain, "<<<<<<<<<<");
-      console.log(req.body, "<<<<<<<<<<");
       let duration
       let price
       let PlanId
@@ -90,12 +87,10 @@ class ControllerAdmin {
           duration = data
 
           return priceCalculator(duration, boat)
-          // console.log(price);
       })
 
       
       .then (data => {
-          // console.log(duration);
           price = data
           return boatValidation(boat, true, id)
       })
@@ -147,7 +142,6 @@ class ControllerAdmin {
           else errors = err
           if(!captain) errors.push(`Captain tidak boleh kosong`)
           if(!boat) errors.push(`Boat tidak boleh kosong`)
-          console.log(err);
           res.send(err)
       })
 
@@ -192,7 +186,6 @@ class ControllerAdmin {
           
           res.render(`addPlan`, {portData, captainData, boatData, obj: boatLooper(boatData)})
       })
-      // res.render(`addPlan`)
 
   }
 
@@ -228,7 +221,6 @@ class ControllerAdmin {
 
       .then(data => {
           PlanId = data[data.length-1].id
-          console.log(captain, PlanId, boat);
           Boat.update({CaptainId: captain, PlanId }, {
               where: {
                   id: boat
